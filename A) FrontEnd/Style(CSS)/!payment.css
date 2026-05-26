@@ -1,0 +1,235 @@
+.payment-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 2rem;
+    z-index: 10;
+}
+
+.payment-card {
+    background: var(--board-white);
+    border: 3px solid var(--ink-black);
+    border-radius: 12px;
+    padding: 3rem 2.5rem;
+    width: 100%;
+    max-width: 480px;
+    text-align: center;
+    box-shadow: 10px 10px 0 var(--ink-black);
+    position: relative;
+    transform: translateY(25px);
+    opacity: 0;
+    animation: popIn 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes popIn {
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.scribble-1 {
+    position: absolute;
+    top: -25px;
+    left: -20px;
+    color: var(--ink-red);
+    font-size: 2.2rem;
+    transform: rotate(-15deg);
+    font-family: var(--font-hand);
+    pointer-events: none;
+    animation: float 3s ease-in-out infinite alternate;
+}
+
+.scribble-2 {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    color: var(--ink-blue);
+    font-size: 2.8rem;
+    transform: rotate(15deg);
+    font-family: var(--font-hand);
+    pointer-events: none;
+    animation: float 3s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes float {
+    0% { transform: translateY(0) rotate(-15deg); }
+    100% { transform: translateY(-10px) rotate(-5deg); }
+}
+
+.lock-icon-wrapper {
+    width: 85px;
+    height: 85px;
+    background: var(--hl-yellow);
+    border: 3px solid var(--ink-black);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 1.5rem;
+    box-shadow: 4px 4px 0 var(--ink-black);
+    font-size: 2.5rem;
+    transform: rotate(-5deg);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s ease;
+}
+
+.payment-card:hover .lock-icon-wrapper {
+    transform: rotate(5deg) scale(1.1);
+}
+
+.payment-title {
+    font-family: var(--font-marker);
+    font-size: clamp(2rem, 5vw, 2.5rem);
+    color: var(--ink-black);
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+}
+
+.payment-desc {
+    font-family: var(--font-body);
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    font-weight: 600;
+}
+
+.price-badge {
+    display: inline-block;
+    font-family: var(--font-marker);
+    font-size: 1.8rem;
+    color: var(--ink-purple);
+    background: #fff;
+    border: 2px dashed var(--ink-purple);
+    padding: 0.5rem 1.8rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    transform: rotate(2deg);
+    transition: all 0.3s ease;
+}
+
+.price-badge:hover {
+    transform: rotate(-2deg) scale(1.05);
+    background: rgba(103, 40, 178, 0.05);
+}
+
+.pay-btn-modern {
+    font-family: var(--font-marker);
+    font-size: 1.4rem;
+    color: #fff;
+    background: var(--ink-green);
+    border: 3px solid var(--ink-black);
+    border-radius: 8px;
+    padding: 1rem 2rem;
+    width: 100%;
+    cursor: pointer;
+    box-shadow: 6px 6px 0 var(--ink-black);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    letter-spacing: 0.05em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    overflow: hidden;
+}
+
+.pay-btn-modern:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 9px 9px 0 var(--ink-black);
+    background: #156236; /* Darker green */
+}
+
+.pay-btn-modern:active {
+    transform: translate(3px, 3px);
+    box-shadow: 3px 3px 0 var(--ink-black);
+}
+
+.secure-note {
+    margin-top: 1.8rem;
+    font-family: var(--font-hand);
+    color: var(--ink-blue);
+    font-size: 1.1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.btn-spinner {
+    display: none;
+    width: 22px;
+    height: 22px;
+    border: 3px solid rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 0.8s linear infinite;
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 600px) {
+    .payment-container {
+        padding: 0.5rem;
+    }
+
+    .payment-card {
+        padding: 2rem 1.5rem;
+        box-shadow: 6px 6px 0 var(--ink-black);
+        border-width: 2px;
+    }
+    
+    .scribble-1 {
+        font-size: 1.5rem;
+        top: -18px;
+        left: -8px;
+    }
+
+    .scribble-2 {
+        font-size: 1.8rem;
+        bottom: -15px;
+        right: -8px;
+    }
+
+    .lock-icon-wrapper {
+        width: 70px;
+        height: 70px;
+        font-size: 2rem;
+        margin-bottom: 1.2rem;
+        border-width: 2px;
+        box-shadow: 3px 3px 0 var(--ink-black);
+    }
+
+    .payment-desc {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .price-badge {
+        font-size: 1.5rem;
+        padding: 0.4rem 1.2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .pay-btn-modern {
+        font-size: 1.25rem;
+        padding: 0.8rem 1.5rem;
+        border-width: 2px;
+        box-shadow: 4px 4px 0 var(--ink-black);
+    }
+    
+    .pay-btn-modern:hover {
+        box-shadow: 6px 6px 0 var(--ink-black);
+        transform: translate(-2px, -2px);
+    }
+    
+    .pay-btn-modern:active {
+        box-shadow: 2px 2px 0 var(--ink-black);
+        transform: translate(2px, 2px);
+    }
+    
+    .secure-note {
+        margin-top: 1.5rem;
+        font-size: 1rem;
+    }
+}

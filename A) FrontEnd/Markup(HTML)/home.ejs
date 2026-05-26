@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <title>EduStreamiX — Grade 11 Classroom</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Nunito:wght@400;600;700;800&family=Permanent+Marker&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../Style(CSS)/home.css">
+</head>
+
+<body>
+    <div class="stage" id="stage">
+        
+        <div class="primary-hero" id="primaryHero">
+            <div class="logos-row">
+                <img class="logo-left-img" src="../Images/osmania_logo_black.png" alt="Osmania Logo">
+                <img class="logo-right-img" src="../Images/otbi_logo_black.png" alt="Osmania TBI Logo">
+            </div>
+
+            <h1 class="brand-heading" id="brandHeading">
+                <span class="brand-edu">edu</span><span class="brand-stream">Streami</span><span class="brand-x">X</span>
+            </h1>
+
+            <div class="hero-badge">
+                ✨ The Distraction-Free Platform
+            </div>
+
+            <div class="brand-subtitle">
+                <span id="highlightTarget" class="highlight">for grade 11</span>
+            </div>
+            
+            <div id="videosAd" class="videos-ad" style="margin-top: 1.5rem; font-family: 'Nunito', sans-serif; font-size: 1.15rem; color: #4a5568; font-weight: 700; text-align: center; letter-spacing: 0.5px;">
+                🎥 180+ Curated Video Lessons
+            </div>
+        </div>
+
+        <div class="board-selection-container" id="boardSelectionContainer">
+            <h2 class="board-title">Choose Your Board</h2>
+            
+            <div class="board-cards-grid">
+                <!-- SSC -->
+                <div class="board-card ssc" data-value="SSC">
+                    <div class="board-card-badge">SSC</div>
+                    <div class="board-card-name">Telangana SSC</div>
+                    <div class="board-card-desc">State Board syllabus and examinations</div>
+                </div>
+                
+                <!-- CBSE -->
+                <div class="board-card cbse" data-value="CBSE">
+                    <div class="board-card-badge">CBSE</div>
+                    <div class="board-card-name">CBSE</div>
+                    <div class="board-card-desc">Central Board of Secondary Education</div>
+                </div>
+                
+                <!-- ISC -->
+                <div class="board-card isc" data-value="ISC">
+                    <div class="board-card-badge">ISC</div>
+                    <div class="board-card-name">ISC</div>
+                    <div class="board-card-desc">Indian School Certificate syllabus</div>
+                </div>
+            </div>
+
+            <input type="hidden" id="selectedBoardInput" value="">
+        </div>
+
+    </div>
+
+    <div class="page-loader-overlay" id="pageLoaderOverlay">
+        <div class="page-loader-spinner"></div>
+        <p class="page-loader-text">Setting up your classroom...</p>
+    </div>
+
+    <script src="../Script(JS)/home.js"></script>
+</body>
+
+</html>

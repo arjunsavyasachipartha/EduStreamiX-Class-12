@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study - EduStreamiX</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="../Style(CSS)/study.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-content"
+            style="display: flex; justify-content: center; align-items: center; width: 100%;">
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <a href="/" class="logo-link" style="text-decoration: none;">
+                    <div class="logo">
+                        <span class="logo-edu">edu</span>
+                        <span class="logo-stream">Streami</span>
+                        <span class="logo-x">X</span>
+                    </div>
+                </a>
+                <div class="nav-info" style="margin-top: 0.25rem;">
+                    <span class="badge">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            style="margin-right: 0.25rem;">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                        </svg>
+                        <%= studyBoard %> - Grade <%= studyGrade %>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <header class="page-header">
+            <h1 class="title">Your Subjects</h1>
+            <p class="subtitle">Select a subject to dive into the syllabus.</p>
+        </header>
+
+        <div class="subjects-grid" id="subjectsGrid">
+            <% if (studySyllabus && studySyllabus.length> 0) {
+                studySyllabus.sort((a, b) => a.subject.localeCompare(b.subject));
+                %>
+                <% studySyllabus.forEach(function(item) { %>
+                    <div class="subject-card" data-subject="<%= item.subject %>">
+                        <div class="subject-icon">📚</div>
+                        <h2 class="subject-name">
+                            <%= item.subject %>
+                        </h2>
+                        <div class="card-footer">
+                            <span>Explore</span>
+                            <span class="arrow">→</span>
+                        </div>
+                    </div>
+                    <% }); %>
+                        <% } else { %>
+                            <div class="no-data">
+                                <p>No subjects found for this grade and board.</p>
+                            </div>
+                            <% } %>
+        </div>
+
+        <div class="units-view" id="unitsView" style="display: none;">
+            <div class="units-header header-actions">
+                <button class="btn-back" id="backToSubjectsBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                    Back to Subjects
+                </button>
+
+            </div>
+
+            <div class="units-grid" id="unitsGrid">
+                <!-- Units will be dynamically inserted here by JS -->
+            </div>
+
+            <div class="test-suggestion-container">
+                <div class="test-suggestion-content">
+                    <h3>Ready to check your knowledge?</h3>
+                    <p>Take a quick test to reinforce what you've learned. It's completely optional!</p>
+                </div>
+                <button class="btn-test-trigger" data-context="subject">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                    </svg>
+                    Take a Practice Test
+                </button>
+            </div>
+        </div>
+
+        <div class="chapters-view" id="chaptersView" style="display: none;">
+            <div class="chapters-header header-actions">
+                <button class="btn-back" id="backToUnitsBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                    Back to Units
+                </button>
+
+            </div>
+
+            <div class="chapters-grid" id="chaptersGrid">
+                <!-- Chapters will be dynamically inserted here by JS -->
+            </div>
+
+            <div class="test-suggestion-container">
+                <div class="test-suggestion-content">
+                    <h3>Ready to check your knowledge?</h3>
+                    <p>Take a quick test to reinforce what you've learned. It's completely optional!</p>
+                </div>
+                <button class="btn-test-trigger" data-context="unit">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                    </svg>
+                    Take a Practice Test
+                </button>
+            </div>
+        </div>
+
+        <div class="resource-view" id="resourceView" style="display: none;">
+            <div class="resource-header header-actions">
+                <button class="btn-back" id="backToPreviousBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                    Back
+                </button>
+
+            </div>
+
+            <div class="video-container" id="videoContainer">
+                <!-- YouTube iframe will be dynamically inserted here -->
+            </div>
+
+            <div class="video-controls" id="videoControls" style="display: none;">
+                <p class="video-status" id="videoStatus">Video 1 of 2</p>
+                <div class="video-buttons">
+                    <button class="btn-video-nav" id="prevVideoBtn" disabled>
+                        &larr; Previous
+                    </button>
+                    <button class="btn-video-nav" id="nextVideoBtn">
+                        Next &rarr;
+                    </button>
+                </div>
+            </div>
+
+            <div class="video-disclaimer" style="text-align: center; margin-top: 1rem; padding: 0.75rem 1rem; background-color: #f8f9fa; border-radius: 8px; font-family: 'Lora', serif; font-size: 0.85rem; color: #555; border: 1px solid #e9ecef; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+                <strong>Disclaimer:</strong> Embedded videos are the property of their respective creators and YouTube channels. All rights belong to the original owners.
+            </div>
+
+            <div class="test-suggestion-container">
+                <div class="test-suggestion-content">
+                    <h3>Ready to check your knowledge?</h3>
+                    <p>Take a quick test to reinforce what you've learned. It's completely optional!</p>
+                </div>
+                <button class="btn-test-trigger" data-context="chapter">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                    </svg>
+                    Take a Practice Test
+                </button>
+            </div>
+        </div>
+
+        <div class="actions" id="mainActions">
+            <a href="/" class="btn-home">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                Back to Home
+            </a>
+        </div>
+
+        <!-- Test Configuration Modal -->
+        <div class="modal-overlay" id="testModal">
+            <div class="modal-content">
+                <h3 class="modal-title">Configure Test</h3>
+                <p class="modal-desc" id="testModalDesc">Select the difficulty and length of your test.</p>
+
+                <div class="test-config-section">
+                    <h4>Difficulty</h4>
+                    <div class="pill-group" id="difficultyGroup">
+                        <button class="config-pill selected" data-value="easy">Easy</button>
+                        <button class="config-pill" data-value="medium">Medium</button>
+                        <button class="config-pill" data-value="hard">Hard</button>
+                    </div>
+                </div>
+
+                <!-- MCQ config (CBSE/ICSE) -->
+                <div class="test-config-section" id="mcqConfigSection">
+                    <h4>Number of Questions</h4>
+                    <div class="pill-group" id="questionsGroup">
+                        <button class="config-pill selected" data-value="5">5</button>
+                        <button class="config-pill" data-value="10">10</button>
+                        <button class="config-pill" data-value="25">25</button>
+                    </div>
+                </div>
+
+                <!-- SSC Theory config -->
+                <div class="test-config-section" id="sscConfigSection" style="display:none;">
+                    <h4>Question Type</h4>
+                    <div class="pill-group" id="questionTypeGroup">
+                        <button class="config-pill selected" data-value="very_short">Very Short <span
+                                class="pill-sub">15 Qs</span></button>
+                        <button class="config-pill" data-value="short">Short <span class="pill-sub">10
+                                Qs</span></button>
+                        <button class="config-pill" data-value="long">Long <span class="pill-sub">5 Qs</span></button>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button class="modal-btn-cancel" id="cancelTestBtn">Cancel</button>
+                    <button class="modal-btn-submit" id="startTestBtn">Start Test</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== TEST VIEW ========== -->
+        <div class="test-view-overlay" id="testViewOverlay">
+            <div class="test-view-inner">
+
+                <!-- Header bar -->
+                <div class="test-view-header">
+                    <div class="test-meta">
+                        <span class="test-label" id="testViewLabel">Test</span>
+                    </div>
+                    <div class="test-timer-wrap">
+                        <div class="test-timer-ring">
+                            <svg viewBox="0 0 60 60" class="timer-svg">
+                                <circle cx="30" cy="30" r="26" class="timer-track" />
+                                <circle cx="30" cy="30" r="26" class="timer-arc" id="timerArc" />
+                            </svg>
+                            <span class="timer-digits" id="timerDigits">00:00</span>
+                        </div>
+                        <span class="timer-hint">avg time</span>
+                    </div>
+                    <button class="btn-end-test" id="endTestBtn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18" />
+                            <line x1="6" y1="6" x2="18" y2="18" />
+                        </svg>
+                        End Test
+                    </button>
+                </div>
+
+                <!-- Progress bar -->
+                <div class="test-progress-bar">
+                    <div class="test-progress-fill" id="testProgressFill"></div>
+                </div>
+                <p class="test-progress-label" id="testProgressLabel">Question 1 of 5</p>
+
+                <!-- Question card -->
+                <div class="test-question-card" id="testQuestionCard">
+                    <p class="question-text" id="questionText">Loading...</p>
+                    <div class="options-grid" id="optionsGrid"></div>
+                    <textarea class="answer-textarea" id="answerTextarea" placeholder="Write your answer here..."
+                        style="display:none;"></textarea>
+                    <p class="marks-badge" id="marksBadge" style="display:none;"></p>
+                </div>
+
+                <!-- Evaluating overlay -->
+                <div class="evaluating-overlay" id="evaluatingOverlay" style="display:none;">
+                    <div class="evaluating-spinner"></div>
+                    <p class="evaluating-text">AI is evaluating your answers...</p>
+                </div>
+
+                <!-- Navigation -->
+                <div class="test-nav-row">
+                    <button class="btn-test-nav btn-prev-q" id="prevQBtn" disabled>← Prev</button>
+                    <button class="btn-test-nav btn-next-q" id="nextQBtn">Next →</button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ========== TIME-UP DIALOG ========== -->
+        <div class="modal-overlay" id="timeUpModal">
+            <div class="modal-content timeup-modal">
+                <div class="timeup-icon">⏰</div>
+                <h3 class="modal-title">Time's Up!</h3>
+                <p class="modal-desc">Your average time limit has ended. You can continue or submit your test now.</p>
+                <div class="modal-actions">
+                    <button class="modal-btn-cancel" id="continueTestBtn">Continue</button>
+                    <button class="modal-btn-submit" id="submitTestBtn">Submit Test</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== RESULTS VIEW ========== -->
+        <div class="modal-overlay" id="resultsModal">
+            <div class="modal-content results-modal">
+                <div class="results-score-wrap">
+                    <div class="results-score-ring">
+                        <svg viewBox="0 0 80 80" class="results-svg">
+                            <circle cx="40" cy="40" r="34" class="results-track" />
+                            <circle cx="40" cy="40" r="34" class="results-arc" id="resultsArc" />
+                        </svg>
+                        <span class="results-pct" id="resultsPct">0%</span>
+                    </div>
+                </div>
+                <h3 class="modal-title" id="resultsTitle">Test Complete!</h3>
+                <p class="results-stat" id="resultsStat"></p>
+                <div class="results-breakdown" id="resultsBreakdown"></div>
+                <div class="modal-actions" style="margin-top:1.5rem;">
+                    <button class="modal-btn-submit" id="closeResultsBtn">Done</button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        window.SYLLABUS_DATA = <%- JSON.stringify(studySyllabus || []) %>;
+        window.BOARD_NAME = "<%= studyBoard %>";
+        window.GRADE = "<%= studyGrade %>";
+    </script>
+    <script src="../Script(JS)/study.js"></script>
+</body>
+
+</html>
