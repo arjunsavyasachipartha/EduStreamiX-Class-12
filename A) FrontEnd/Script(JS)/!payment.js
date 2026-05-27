@@ -48,21 +48,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 description: "Grade 11 Classroom Access",
                 image: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png", // Nice academic cap icon for the popup
                 
-                // Force an IMMEDIATE and EXCLUSIVE UPI QR Code display
+                // Force an IMMEDIATE and EXCLUSIVE UPI flow
+                // Desktop will show QR automatically, Mobile will show App Intents (GPay, PhonePe, etc.)
                 config: {
                     display: {
                         blocks: {
-                            qr_only: {
-                                name: "Scan to Pay",
+                            upi_only: {
+                                name: "Pay via UPI",
                                 instruments: [
                                     {
                                         method: "upi",
-                                        flows: ["qr"] // Forces only the QR code to appear, skipping the UPI app list or VPA entry
+                                        // "qr" is for desktop. "intent" is strictly required for mobile devices!
+                                        flows: ["qr", "intent"]
                                     }
                                 ]
                             }
                         },
-                        sequence: ["block.qr_only"],
+                        sequence: ["block.upi_only"],
                         preferences: {
                             show_default_blocks: false
                         }
